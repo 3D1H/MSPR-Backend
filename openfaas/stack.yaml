@@ -1,0 +1,43 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31112
+functions:
+  cofrap-generate-password:
+    lang: python3-http
+    handler: ./cofrap-generate-password
+    image: tsaintenoy/cofrap-generate-password:latest
+    secrets:
+      - db-user
+      - db-password
+      - db-host
+      - db-name
+      - fernet-key
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+
+  cofrap-generate-2fa:
+    lang: python3-http
+    handler: ./cofrap-generate-2fa
+    image: tsaintenoy/cofrap-generate-2fa:latest
+    secrets:
+      - db-user
+      - db-password
+      - db-host
+      - db-name
+      - fernet-key
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+
+  cofrap-authenticate-user:
+    lang: python3-http
+    handler: ./cofrap-authenticate-user
+    image: tsaintenoy/cofrap-authenticate-user:latest
+    secrets:
+      - db-user
+      - db-password
+      - db-host
+      - db-name
+      - fernet-key
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
