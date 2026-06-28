@@ -1,0 +1,402 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+      deployment.kubernetes.io/revision: "7"
+      prometheus.io.scrape: "false"
+    creationTimestamp: "2026-06-03T09:22:47Z"
+    generation: 7
+    labels:
+      faas_function: cofrap-generate-password
+    name: cofrap-generate-password
+    namespace: openfaas-fn
+    resourceVersion: "22865"
+    uid: e810296e-bae9-4efa-b9fe-3caf52511549
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        faas_function: cofrap-generate-password
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+          kubectl.kubernetes.io/restartedAt: "2026-06-15T08:01:29Z"
+          prometheus.io.scrape: "false"
+        labels:
+          faas_function: cofrap-generate-password
+          uid: "31683284"
+        name: cofrap-generate-password
+      spec:
+        containers:
+        - env:
+          - name: fprocess
+            value: python index.py
+          image: tsaintenoy/cofrap-generate-password:latest
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: cofrap-generate-password
+          ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: æå
+          securityContext:
+            readOnlyRootFilesystem: false
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/openfaas/secrets
+            name: cofrap-generate-password-projected-secrets
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: æå
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: cofrap-generate-password-projected-secrets
+          projected:
+            defaultMode: 420
+            sources:
+            - secret:
+                items:
+                - key: db-user
+                  path: db-user
+                name: db-user
+            - secret:
+                items:
+                - key: db-password
+                  path: db-password
+                name: db-password
+            - secret:
+                items:
+                - key: db-host
+                  path: db-host
+                name: db-host
+            - secret:
+                items:
+                - key: db-name
+                  path: db-name
+                name: db-name
+            - secret:
+                items:
+                - key: fernet-key
+                  path: fernet-key
+                name: fernet-key
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-03T12:22:41Z"
+      lastUpdateTime: "2026-06-15T08:01:35Z"
+      message: ReplicaSet "cofrap-generate-password-856f678b65" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-17T07:43:15Z"
+      lastUpdateTime: "2026-06-17T07:43:15Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 7
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+      deployment.kubernetes.io/revision: "6"
+      prometheus.io.scrape: "false"
+    creationTimestamp: "2026-06-03T09:22:48Z"
+    generation: 6
+    labels:
+      faas_function: cofrap-generate-2fa
+    name: cofrap-generate-2fa
+    namespace: openfaas-fn
+    resourceVersion: "23643"
+    uid: 8cffc5be-9737-4d69-9326-aac8eea99760
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        faas_function: cofrap-generate-2fa
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+          prometheus.io.scrape: "false"
+        labels:
+          faas_function: cofrap-generate-2fa
+          uid: "545170245"
+        name: cofrap-generate-2fa
+      spec:
+        containers:
+        - env:
+          - name: fprocess
+            value: python index.py
+          image: tsaintenoy/cofrap-generate-2fa:latest
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: cofrap-generate-2fa
+          ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: æå
+          securityContext:
+            readOnlyRootFilesystem: false
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/openfaas/secrets
+            name: cofrap-generate-2fa-projected-secrets
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: æå
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: cofrap-generate-2fa-projected-secrets
+          projected:
+            defaultMode: 420
+            sources:
+            - secret:
+                items:
+                - key: db-user
+                  path: db-user
+                name: db-user
+            - secret:
+                items:
+                - key: db-password
+                  path: db-password
+                name: db-password
+            - secret:
+                items:
+                - key: db-host
+                  path: db-host
+                name: db-host
+            - secret:
+                items:
+                - key: db-name
+                  path: db-name
+                name: db-name
+            - secret:
+                items:
+                - key: fernet-key
+                  path: fernet-key
+                name: fernet-key
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-03T12:22:42Z"
+      lastUpdateTime: "2026-06-03T12:38:44Z"
+      message: ReplicaSet "cofrap-generate-2fa-c9ffd7d59" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-23T19:53:13Z"
+      lastUpdateTime: "2026-06-23T19:53:13Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 6
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+      deployment.kubernetes.io/revision: "6"
+      prometheus.io.scrape: "false"
+    creationTimestamp: "2026-06-03T09:22:49Z"
+    generation: 6
+    labels:
+      faas_function: cofrap-authenticate-user
+    name: cofrap-authenticate-user
+    namespace: openfaas-fn
+    resourceVersion: "23637"
+    uid: a74bb22f-2127-4376-9e20-f63dc9119209
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        faas_function: cofrap-authenticate-user
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+          prometheus.io.scrape: "false"
+        labels:
+          faas_function: cofrap-authenticate-user
+          uid: "287723272"
+        name: cofrap-authenticate-user
+      spec:
+        containers:
+        - env:
+          - name: fprocess
+            value: python index.py
+          image: tsaintenoy/cofrap-authenticate-user:latest
+          imagePullPolicy: Never
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: cofrap-authenticate-user
+          ports:
+          - containerPort: 8080
+            name: http
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /_/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: æå
+          securityContext:
+            readOnlyRootFilesystem: false
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/openfaas/secrets
+            name: cofrap-authenticate-user-projected-secrets
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: æå
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: cofrap-authenticate-user-projected-secrets
+          projected:
+            defaultMode: 420
+            sources:
+            - secret:
+                items:
+                - key: db-user
+                  path: db-user
+                name: db-user
+            - secret:
+                items:
+                - key: db-password
+                  path: db-password
+                name: db-password
+            - secret:
+                items:
+                - key: db-host
+                  path: db-host
+                name: db-host
+            - secret:
+                items:
+                - key: db-name
+                  path: db-name
+                name: db-name
+            - secret:
+                items:
+                - key: fernet-key
+                  path: fernet-key
+                name: fernet-key
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-03T10:56:44Z"
+      lastUpdateTime: "2026-06-03T12:34:06Z"
+      message: ReplicaSet "cofrap-authenticate-user-857f9cb59d" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-23T19:53:12Z"
+      lastUpdateTime: "2026-06-23T19:53:12Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 6
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

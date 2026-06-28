@@ -1,0 +1,83 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: openfaas
+      meta.helm.sh/release-namespace: openfaas
+    creationTimestamp: "2026-05-22T09:10:27Z"
+    labels:
+      app: openfaas
+      app.kubernetes.io/managed-by: Helm
+      chart: openfaas-15.0.6
+      component: gateway
+      heritage: Helm
+      release: openfaas
+    name: gateway
+    namespace: openfaas
+    resourceVersion: "1218"
+    uid: facd9bf5-d51f-4a14-90a1-54a2d60696ee
+  spec:
+    clusterIP: 10.43.243.83
+    clusterIPs:
+    - 10.43.243.83
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      nodePort: 31407
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: gateway
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: æå
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: openfaas
+      meta.helm.sh/release-namespace: openfaas
+    creationTimestamp: "2026-05-22T09:10:27Z"
+    labels:
+      app: openfaas
+      app.kubernetes.io/managed-by: Helm
+      chart: openfaas-15.0.6
+      component: gateway
+      heritage: Helm
+      release: openfaas
+    name: gateway-external
+    namespace: openfaas
+    resourceVersion: "810"
+    uid: 953ddda3-02a1-4579-911a-97c74fafa84d
+  spec:
+    clusterIP: 10.43.208.109
+    clusterIPs:
+    - 10.43.208.109
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      nodePort: 31112
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: gateway
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: æå
+kind: List
+metadata:
+  resourceVersion: ""

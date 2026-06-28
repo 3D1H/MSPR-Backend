@@ -1,0 +1,95 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+      prometheus.io.scrape: "false"
+    creationTimestamp: "2026-06-03T09:22:47Z"
+    name: cofrap-generate-password
+    namespace: openfaas-fn
+    resourceVersion: "13266"
+    uid: 2c10b93c-317a-4ef7-827a-5faeaff8e89e
+  spec:
+    clusterIP: 10.43.52.244
+    clusterIPs:
+    - 10.43.52.244
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      faas_function: cofrap-generate-password
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: æå
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+      prometheus.io.scrape: "false"
+    creationTimestamp: "2026-06-03T09:22:48Z"
+    name: cofrap-generate-2fa
+    namespace: openfaas-fn
+    resourceVersion: "13315"
+    uid: e1aee152-c14d-49d0-8fde-eef75babe018
+  spec:
+    clusterIP: 10.43.182.60
+    clusterIPs:
+    - 10.43.182.60
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      faas_function: cofrap-generate-2fa
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: æå
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      com.openfaas.kubernetes.imagePullSecrets: dockerhub-secret
+      prometheus.io.scrape: "false"
+    creationTimestamp: "2026-06-03T09:22:49Z"
+    name: cofrap-authenticate-user
+    namespace: openfaas-fn
+    resourceVersion: "13360"
+    uid: ff37b942-cf7e-48cb-9743-a936622dc13f
+  spec:
+    clusterIP: 10.43.82.8
+    clusterIPs:
+    - 10.43.82.8
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      faas_function: cofrap-authenticate-user
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: æå
+kind: List
+metadata:
+  resourceVersion: ""
